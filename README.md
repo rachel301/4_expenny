@@ -1,36 +1,179 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 📊 Expenny — Subscription Tracker
+
+Take control of your subscriptions and understand where your money goes.
+
+Expenny is a full-stack subscription tracking web application built with **Next.js** and **Firebase Authentication**, designed to help users manage recurring expenses, monitor spending habits, and gain insights into subscription usage.
+
+Built with a clean, modern interface styled using **FantaCSS by Smoljames**.
+
+---
+
+## ✨ Features
+
+*  User authentication with Firebase
+*  Secure login and personalized user experience
+*  Track active subscriptions and recurring expenses
+*  Subscription analytics and spending summaries
+*  Upcoming billing insights
+*  Categorize subscriptions
+*  Fast navigation and modern UI with Next.js
+*  Responsive design across devices
+
+---
+
+## 🧰 Tech Stack
+
+### Frontend
+
+* Next.js
+* React
+* JavaScript
+
+### Backend / Authentication
+
+* Firebase Authentication
+
+### Styling
+
+* FantaCSS (created by Smoljames)
+
+### Deployment
+
+* Netlify
+
+---
+
+## 🏗️ Architecture
+
+```text
+Client (Next.js)
+       ↓
+Firebase Authentication
+       ↓
+User Session
+       ↓`
+Subscription Data
+       ↓
+Analytics Dashboard
+```
+
+---
+
+## 📸 Preview
+
+## Landing page
+
+![Landing page](./screenshots/landing-page.png)
+
+## Login
+
+![Login](./screenshots/login.png)
+
+## Dashboard
+
+![Dashboard](./screenshots/dashboard.png)
+
+---
 
 ## Getting Started
 
-First, run the development server:
+Clone the repository:
+
+```bash
+git clone <your-repository-url>
+```
+
+Move into the project:
+
+```bash
+cd <your-project-folder>
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create an environment file:
+
+```text
+.env.local
+```
+
+Add your Firebase configuration:
+
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 📂 Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+app/
+components/
+context/
+public/
+utils/
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+firebase.js
+package.json
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📊 Core Analytics
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Expenny provides subscription insights including:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Total monthly spending
+* Total yearly spending
+* Average monthly cost
+* Active subscription count
+* Top spending category
+* Upcoming billing reminders
+* Most expensive subscription
+
+---
+
+## 🔮 Future Improvements
+
+* Email reminders for renewals
+* Budget tracking
+* Subscription cancellation suggestions
+* Charts and visual analytics
+* Multi-currency support
+* Export subscription reports
+
+---
+
+## 🙌 Credits
+
+UI styling powered by **FantaCSS** by **Smoljames**
+
+Built with **Next.js** and **Firebase**
+
+---
+
+## 👩‍💻 Author
+
+Built by **Rachel Roshni**
