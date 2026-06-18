@@ -75,9 +75,13 @@ export function AuthProvider(props) {
                 }
 
                 console.log('Fetching user data')
+                console.log('UID:', user.uid)
 
                 const docRef = doc(db, 'users', user.uid)
+                console.log(docRef.path)
+
                 const docSnap = await getDoc(docRef)
+                console.log(docSnap.exists())
 
                 let firebaseData = { subscriptions: [] }
 
