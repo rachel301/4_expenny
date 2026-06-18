@@ -63,31 +63,38 @@ export function AuthProvider(props) {
 
 
     useEffect(() => {
-        const unsubscribe= onAuthStateChanged(auth, async user => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             try {
-                setCurrentUser(user)
-                
-                if (!user) {return}
                 setLoading(true)
+                setCurrentUser(user)
+
+                if (!user) {
+                    setUserData(null)
+                    setLoading(false)
+                    return
+                }
+
+                console.log('Fetching user data')
 
                 const docRef = doc(db, 'users', user.uid)
                 const docSnap = await getDoc(docRef)
 
-                console.log('Fetching user data')
+                let firebaseData = { subscriptions: [] }
 
-                // let firebaseData= {subscriptions}
-                let firebaseData = {subscriptions: []}
                 if (docSnap.exists()) {
                     console.log('Found user data')
                     firebaseData = docSnap.data()
-                } 
+                }
+
                 setUserData(firebaseData)
-                setLoading(false)
 
             } catch (err) {
                 console.log(err.message)
+
+            } finally {
+                setLoading(false)
             }
-        } )
+        })
         return unsubscribe
     }, [])
 
