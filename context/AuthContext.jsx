@@ -13,13 +13,13 @@ export function useAuth() {
 }
 
 export function AuthProvider(props) {
-    const {children} =props 
+    const { children } = props
 
     const [currentUser, setCurrentUser] = useState(null)
     const [userData, setUserData] = useState(null)
     const [loading, setLoading] = useState(false)
 
-    function signup(email,password) {
+    function signup(email, password) {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
@@ -36,67 +36,57 @@ export function AuthProvider(props) {
     async function saveToFirebase(data) {
         try {
             const userRef = doc(db, 'users', currentUser.uid)
-            const res= await setDoc(userRef, {
+            const res = await setDoc(userRef, {
                 subscriptions: data
-            }, {merge:true})
-        } catch(err) {
+            }, { merge: true })
+        } catch (err) {
             console.log(err.message)
         }
     }
 
     async function handleAddSubscription(newSubscription) {
-        if (userData.subscriptions.length >30) {return}
-        const newSubscriptions=[...userData.subscriptions, newSubscription]
-        setUserData({subscriptions: newSubscriptions})
+        if (userData.subscriptions.length > 30) { return }
+
+        const newSubscriptions = [...userData.subscriptions, newSubscription]
+        setUserData({ subscriptions: newSubscriptions })
 
         await saveToFirebase(newSubscriptions)
     }
 
     async function handleDeleteSubscription(index) {
         const newSubscriptions = userData.subscriptions.filter((val, valIndex) => {
-            return valIndex!==index
+            return valIndex !== index
         })
-        setUserData({subscriptions: newSubscriptions})
+        setUserData({ subscriptions: newSubscriptions })
 
         await saveToFirebase(newSubscriptions)
     }
 
 
+
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async user => {
             try {
-                setLoading(true)
                 setCurrentUser(user)
 
-                if (!user) {
-                    setUserData(null)
-                    setLoading(false)
-                    return
-                }
-
-                console.log('Fetching user data')
-                console.log('UID:', user.uid)
+                if (!user) { return }
+                setLoading(true)
 
                 const docRef = doc(db, 'users', user.uid)
-                console.log(docRef.path)
-
                 const docSnap = await getDoc(docRef)
-                console.log(docSnap.exists())
-
-                let firebaseData = { subscriptions: [] }
+                console.log('Fetching user data')
+        
+                let firebaseData = { subscriptions: [] } 
 
                 if (docSnap.exists()) {
                     console.log('Found user data')
                     firebaseData = docSnap.data()
                 }
-
                 setUserData(firebaseData)
+                setLoading(false)
 
             } catch (err) {
                 console.log(err.message)
-
-            } finally {
-                setLoading(false)
             }
         })
         return unsubscribe
